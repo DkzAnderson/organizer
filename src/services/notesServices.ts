@@ -1,7 +1,6 @@
 import { collection, getDocs, orderBy, query, deleteDoc, doc } from "firebase/firestore";
 import { Note } from "../types/Note"
 import { db } from "../config/firebase";
-import { Temporal } from "@js-temporal/polyfill";
 import { Notify } from "../toastify/Notify";
 
 export interface fetchOrderProps{
@@ -18,17 +17,12 @@ function fromFirebase(value:any){
         date: value.date ? value.date : '',
         text: value.text ? value.text : ''
     }
-
     return new Note({
         id: nota.id,
         name: nota.name,
         date: nota.date,
         text: nota.text
     });
-}
-
-function toFirebase(){
-
 }
 
 

@@ -1,10 +1,3 @@
-import { 
-    collection, getDocs, setDoc, doc, 
-    updateDoc, deleteDoc , query,
-    orderBy, limit, startAfter,
-    where
-} from "firebase/firestore";
-
 export const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,

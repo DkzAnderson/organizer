@@ -18,7 +18,7 @@ const router = createHashRouter([
     children:[
       {
         index: true,
-        element: <NotesMain/>
+        element: <NoteList/>
       },
       {
         path:'/notes',
@@ -42,11 +42,6 @@ const router = createHashRouter([
   },
 
 ])
-
-
-
-
-
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

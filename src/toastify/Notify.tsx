@@ -1,10 +1,4 @@
-import React from 'react'
 import { toast } from 'react-toastify';
-
-interface Props {
-    text: string;
-    type: 'error' | 'success';
-}
 
 interface toastConfig {
     position: 'top-center';

@@ -15,7 +15,7 @@ interface CustomSelectProps {
 }
 
 
-const CustomSelect: React.FC<CustomSelectProps> = ({ options, onChange, placeholder = 'Nombre, creciente' }) => {
+const CustomSelect: React.FC<CustomSelectProps> = ({ options, onChange, placeholder = 'Fecha, descendente' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
 

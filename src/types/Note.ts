@@ -1,6 +1,6 @@
 import { Temporal } from '@js-temporal/polyfill';
 import { db } from '../config/firebase';
-import { doc, setDoc, updateDoc, deleteDoc, addDoc, collection } from 'firebase/firestore';
+import { doc, updateDoc, addDoc, collection } from 'firebase/firestore';
 import { Notify } from '../toastify/Notify';
 
 interface NoteProps {
@@ -16,11 +16,11 @@ export class Note {
     name: string;
     text: string
 
-    constructor({name, text, id = 'nada'}: NoteProps){
+    constructor({name, text, id = 'nada', date}: NoteProps){
         this.id = id
         this.name = name;
         this.text = text;
-        this.date = `${Temporal.Now.plainTimeISO().toString().slice(0,5)} / ${Temporal.Now.plainDateISO().toString()}`;
+        this.date = date ? date : `${Temporal.Now.plainTimeISO().toString().slice(0,5)} / ${Temporal.Now.plainDateISO().toString()}`;
     }
 
     async save(){

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { FaTrashCan } from "react-icons/fa6";
 import { EditNote } from './EditNote';
-import { HiDocumentPlus } from "react-icons/hi2";
 import CustomSelect from './CustomSelect';
 import { useNavigate } from 'react-router';
 import { Note } from '../../types/Note';
 import { getNotes, fetchOrderProps } from '../../services/notesServices';
 import { DeleteNote } from '../../services/notesServices';
+import { NavButton } from './NavButton';
 
 
 interface orderOptionsProps {
@@ -21,12 +21,13 @@ export const NoteList = () => {
   const [noteSelected, selectNote] = useState<Note>();
   const [deleteInterface, setDeleteInterface] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [currentOrder,setCurrentOrder] = useState<fetchOrderProps>({ order: 'asc', type: 'name'})
+  const [currentOrder,setCurrentOrder] = useState<fetchOrderProps>({ order: 'asc', type: 'date'})
   const navigate = useNavigate();
 
   const FetchData = async ()=>{
     setLoading(true);
     const results = await getNotes({order: currentOrder.order, type: currentOrder.type});
+    console.log(results)
     setData(results);
     setLoading(false);
   }
@@ -82,6 +83,7 @@ export const NoteList = () => {
   ]
 
   const changeOrder = (value: fetchOrderProps)=>{
+    console.log(value)
     setCurrentOrder(value);
   }
 
@@ -100,7 +102,7 @@ export const NoteList = () => {
 
   if(loading){
     return(
-      <section className='w-full min-h-screen flex items-center justify-center'>
+      <section className='w-full min-h-screen flex items-center justify-center bg-[var(--st-light)] dark:bg-[var(--st-dark)]'>
         <h1 className='animate-pulse duration-300 dark:text-[var(--text)] text-2xl'>
           Cargando ...
         </h1>
@@ -112,14 +114,12 @@ export const NoteList = () => {
 
   if(data.length > 0){
     return (
-      <section className='w-full min-h-screen flex flex-col relative'>
+      <section className='w-full min-h-screen flex flex-col relative bg-[var(--st-light)] dark:bg-[var(--st-dark)]'>
        
-        <button
-          onClick={newNote}
-          className='fixed z-20 flex items-center justify-center text-5xl bottom-10 right-8 dark:bg-[var(--rd)] bg-[var(--rd)] dark:text-[var(--txt)] text-[var(--txt)] size-20 rounded-full'
-        >
-          <HiDocumentPlus />
-        </button>
+      <NavButton
+        backToHome={setEditMode}
+        newNote={newNote}
+      />
               {/* Interfaz para eliminar una nota */}
       <div className={`fixed top-0 left-0 ${deleteInterface ? 'flex' : 'hidden'} items-center justify-center z-50 w-full min-h-screen bg-black/75`}>
         <div className='flex flex-col items-center justify-center bg-[(var--nd-light)] dark:bg-[(var--nd-dark)] p-10'>
