@@ -27,7 +27,6 @@ export const NoteList = () => {
   const FetchData = async ()=>{
     setLoading(true);
     const results = await getNotes({order: currentOrder.order, type: currentOrder.type});
-    console.log(results)
     setData(results);
     setLoading(false);
   }
@@ -83,7 +82,6 @@ export const NoteList = () => {
   ]
 
   const changeOrder = (value: fetchOrderProps)=>{
-    console.log(value)
     setCurrentOrder(value);
   }
 
@@ -114,7 +112,7 @@ export const NoteList = () => {
 
   if(data.length > 0){
     return (
-      <section className='w-full min-h-screen flex flex-col relative bg-[var(--st-light)] dark:bg-[var(--st-dark)]'>
+      <section className='w-full min-h-screen flex flex-col relative bg-[var(--st)] dark:bg-[var(--st)]'>
        
       <NavButton
         backToHome={setEditMode}
@@ -123,7 +121,7 @@ export const NoteList = () => {
               {/* Interfaz para eliminar una nota */}
       <div className={`fixed top-0 left-0 ${deleteInterface ? 'flex' : 'hidden'} items-center justify-center z-50 w-full min-h-screen bg-black/75`}>
         <div className='flex flex-col items-center justify-center bg-[(var--nd-light)] dark:bg-[(var--nd-dark)] p-10'>
-          <h1 className='text-white text-2xl font-bold'>
+          <h1 className='text-[var(--txt)] dark:text-[var(--txt)] text-2xl font-bold'>
             ¿ Estas seguro de que quieres eliminar la nota: <b className='text-red-500'>{noteSelected?.name}</b>?
           </h1>
           <span className='w-full mt-10 flex gap-2 h-12 text-2xl font-bold'>
@@ -157,32 +155,36 @@ export const NoteList = () => {
          <CustomSelect options={orderOptions} onChange={changeOrder}/>
         <ul className=' flex flex-col z-10 overflow-auto p-1 gap-2'>
           {/* Lista de notas  */}
-          {data.map((values, i) => (
-            <li
-              key={i}
-              className='dark:bg-[var(--nd)] bg-[var(--nd)] p-2 grid grid-cols-[55%_35%_10%] items-center'
-            >
-              <h2 
-                className='text-lg font-bold text-[var(--txt)] dark:text-[var(--txt)] truncate'
-                onClick={()=>editNote(values)}
+          {data.map((values, i) =>{
+            console.log(values)
+            return(
+              <li
+                key={i}
+                className='dark:bg-[var(--nd)] bg-[var(--nd)] p-2 grid grid-cols-[55%_35%_10%] items-center'
               >
-                {values.name}
-              </h2>
-
-              <h2 
-                className='text-sm text-[var(--txt-2)] text-end'
-                onClick={()=>editNote(values)}
-              >
-                {values.date}
-              </h2>
-              <button
-                className='flex justify-end size-full text-xl text-red-500'
-                onClick={() => answerDeleteNote(values)}
-              >
-                <FaTrashCan />
-              </button>
-            </li>
-          ))}
+                
+                <h2 
+                  className='text-lg font-bold text-[var(--txt)] dark:text-[var(--txt)] truncate'
+                  onClick={()=>editNote(values)}
+                >
+                  {values.name}
+                </h2>
+  
+                <h2 
+                  className='text-sm text-[var(--txt-2)] text-end'
+                  onClick={()=>editNote(values)}
+                >
+                  {values.date}
+                </h2>
+                <button
+                  className='flex justify-end size-full text-xl text-red-500'
+                  onClick={() => answerDeleteNote(values)}
+                >
+                  <FaTrashCan />
+                </button>
+              </li>
+            )
+          })}
         </ul>
         </div>
 
