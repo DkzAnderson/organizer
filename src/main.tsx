@@ -3,43 +3,47 @@ import 'react-toastify/dist/ReactToastify.css';
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
-import { createHashRouter, RouterProvider } from 'react-router';
+import { createHashRouter, Navigate, RouterProvider } from 'react-router';
 import { ThemeProvider } from './context/ThemeProvider.tsx';
 import { UserProvider } from './context/UserProvider.tsx';
 import { NotesMain } from './pages/NotesMain.tsx';
 import { NewNote } from './components/organizador/NewNote.tsx';
-import { NoteList } from './components/organizador/NoteList.tsx';
+import { MainList } from './components/organizer/MainList.tsx';
+
 
 const router = createHashRouter([
   {
     path: '/',
-    element: <App/>,
-    children:[
+    element:  <Navigate to={'notes'}/>,
+  },
+  {
+    path:'/notes',
+    element: <NotesMain/>,
+    children: [
       {
-        index: true,
-        element: <NoteList/>
+        index:true,
+        element:<MainList/>
       },
       {
-        path:'/notes',
-        element: <NotesMain/>,
-        children: [
-          {
-            index:true,
-            element:<NoteList/>
-          },
-          {
-            path:'/notes/main',
-            element: <NoteList/>
-          },
-          {
-            path:'/notes/new',
-            element: <NewNote/>
-          },
-        ]
-      }
+        path:'/notes/main',
+        element: <MainList/>
+      },
+      {
+        path:'/notes/new',
+        element: <NewNote/>
+      },
     ]
   },
+  {
+    path: '/test',
+    element: <NotesMain/>,
+    children: [
+      {
+        index: true,
+        element: <MainList/>
+      }
+    ]
+  }
 
 ])
 

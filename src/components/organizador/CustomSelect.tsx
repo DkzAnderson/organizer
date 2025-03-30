@@ -27,9 +27,9 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ options, onChange, placehol
 
   return (
     <div className="relative inline-block w-full h-10 z-20">
-      <div className="bg-[var(--rd)] dark:bg-[var(--rd)] h-full flex items-center justify-between p-2 cursor-pointer" 
+      <div className="bg-[var(--rd)] dark:bg-[var(--rd)] h-full flex items-center justify-between p-2 cursor-pointer rounded-lg" 
         onClick={() => setIsOpen(!isOpen)}>
-        <h1 className='text-st font-bold text-sm text-[var(--txt)] dark:text-[var(--txt)]'>
+        <h1 className='text-st font-bold text-[var(--txt)] dark:text-[var(--txt)]'>
             {selectedOption ? selectedOption.label : placeholder}
         </h1>
         <h1 className='text-xl text-card-bg text-[var(--txt)] dark:text-[var(--txt)]'>
@@ -44,7 +44,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({ options, onChange, placehol
               className="px-2 py-2 group hover:bg-interaction cursor-pointer"
               onClick={() => handleOptionClick(option)}
             >
-              <h3 className='group-hover:font-bold duration-300 text-sm text-[var(--txt)] dark:text-[var(--txt)]'>
+              <h3 className='group-hover:font-bold duration-300 text-[var(--txt)] dark:text-[var(--txt)]'>
                 {option.label}
               </h3>
             </li>

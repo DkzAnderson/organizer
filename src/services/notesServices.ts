@@ -8,7 +8,7 @@ export interface fetchOrderProps{
     order: 'asc' | 'desc';
 }
 
-function fromFirebase(value:any){
+export function fromFirebase(value:any){
 
   
     const nota = {
