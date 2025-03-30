@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaSave } from "react-icons/fa";
 import { Note } from '../../types/Note';
 
@@ -22,6 +22,20 @@ export const EditNote: React.FC< Props > = ({initialData,changeInterface,fetch})
         
     }
 
+    useEffect(() => {
+        const handleBackButton = () => {
+          // Aquí rediriges a una sección específica
+          changeInterface(false)
+        };
+      
+        // Escucha el evento de retroceso del historial
+        window.addEventListener("popstate", handleBackButton);
+      
+        return () => {
+          // Limpia el evento al desmontar el componente
+          window.removeEventListener("popstate", handleBackButton);
+        };
+      }, []);
 
     return (
         <section className='flex w-full h-full relative '>

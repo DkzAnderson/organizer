@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { FaTrashCan } from "react-icons/fa6";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
 import { db } from '../../config/firebase';
 import { fromFirebase, getNotes, DeleteNote } from '../../services/notesServices';
 import { Note } from '../../types/Note';
@@ -56,7 +56,7 @@ export const MainList = () => {
             setData(cachedNotes);
             setLoading(false);
         } else {
-            const notesData = await getNotes({ type: 'date', order: 'asc'});
+            const notesData = await getNotes({ type: 'date', order: 'desc'});
             setData(notesData);
             localStorage.setItem('notes', JSON.stringify(notesData));
             setLoading(false);
@@ -64,18 +64,25 @@ export const MainList = () => {
     }
 
     // Función para escuchar cambios en tiempo real desde Firebase
+
     const FetchData = () => {
-        const unsubscribe = onSnapshot(collection(db, "notes"), (snapshot) => {
+        // Realiza una consulta con orden por fecha en Firebase
+        const notesQuery = query(
+            collection(db, "notes"),
+            orderBy("date", "desc") // Ordena por el campo "date" en orden descendente
+        );
+    
+        const unsubscribe = onSnapshot(notesQuery, (snapshot) => {
             const result = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             const updatedNotes = result.map(fromFirebase);
-
+    
             setData(updatedNotes); // Actualizar el estado local
             setLoading(false);
-
+    
             // Actualizar el cache local
             localStorage.setItem('notes', JSON.stringify(updatedNotes));
         });
-
+    
         return unsubscribe; // Retorna la limpieza de la suscripción
     };
 
@@ -100,7 +107,7 @@ export const MainList = () => {
     }
 
     return (
-        <section className='relative'>
+        <section className='relative flex pt-16'>
             {deleteInterface &&  (
             <div className='absolute z-20 flex items-center justify-center min-h-screen w-full bg-black/75'>
             <div className='flex flex-col items-center justify-center bg-[(var--nd-light)] dark:bg-[(var--nd-dark)] p-10'>
@@ -126,13 +133,6 @@ export const MainList = () => {
         </div>
             )}
 
-
-            <button
-                onClick={toggleTheme}
-                className="w-full dark:bg-[var(--th)] bg-[var(--th)] font-bold text-white py-2"
-            >
-                Cambiar Tema
-            </button>
 
             {/* Aquí puedes agregar tu diseño para mostrar las notas */}
             {loading && (

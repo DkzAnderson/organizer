@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { FaSave } from "react-icons/fa";
 import { Note } from '../../types/Note';
 import { Link, useNavigate } from 'react-router';
@@ -22,6 +22,20 @@ export const NewNote = () => {
         },2500)
     }
 
+        useEffect(() => {
+            const handleBackButton = () => {
+              // Aquí rediriges a una sección específica
+              window.location.href = "/notes";
+            };
+          
+            // Escucha el evento de retroceso del historial
+            window.addEventListener("popstate", handleBackButton);
+          
+            return () => {
+              // Limpia el evento al desmontar el componente
+              window.removeEventListener("popstate", handleBackButton);
+            };
+          }, []);
 
     return (
         <section className='flex w-full relative'>

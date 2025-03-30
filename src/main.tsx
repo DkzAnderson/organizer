@@ -9,6 +9,7 @@ import { UserProvider } from './context/UserProvider.tsx';
 import { NotesMain } from './pages/NotesMain.tsx';
 import { NewNote } from './components/organizador/NewNote.tsx';
 import { MainList } from './components/organizer/MainList.tsx';
+import { Finances } from './pages/Finances.tsx';
 
 
 const router = createHashRouter([
@@ -32,6 +33,27 @@ const router = createHashRouter([
         path:'/notes/new',
         element: <NewNote/>
       },
+    ]
+  },
+  {
+    path: '/finances',
+    children: [
+      {
+        index: true,
+        element: <Finances/>
+      },
+      {
+        path: '/finances/balance',
+        element: ''
+      },
+      {
+        path: '/finances/saving',
+        element: ''
+      },
+      {
+        path: '/finances/accounts',
+        element: ''
+      }
     ]
   },
   {
