@@ -38,7 +38,7 @@ export const NewNote = () => {
           }, []);
 
     return (
-        <section className='flex w-full relative'>
+        <section className='flex w-full relative pt-20'>
             <div className='z-10 flex flex-col min-h-screen w-full relative'>
                 <Link 
                     className='text-center text-lg font-bold w-full py-4 dark:bg-[var(--nd)] bg-[var(--nd)] dark:text-[var(--txt)] text-[var(--txt)]'

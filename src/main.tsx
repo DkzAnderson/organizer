@@ -10,6 +10,7 @@ import { NotesMain } from './pages/NotesMain.tsx';
 import { NewNote } from './components/organizador/NewNote.tsx';
 import { MainList } from './components/organizer/MainList.tsx';
 import { Finances } from './pages/Finances.tsx';
+import { Models } from './components/finances/Models.tsx';
 
 
 const router = createHashRouter([
@@ -41,6 +42,10 @@ const router = createHashRouter([
       {
         index: true,
         element: <Finances/>
+      },
+      {
+        path:'/finances/models',
+        element: <Models/>
       },
       {
         path: '/finances/balance',

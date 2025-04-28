@@ -28,6 +28,11 @@ export const NavBar = () => {
     }
   ]
 
+  const changeTheme = ()=> {
+    toggleTheme();
+    setMenu(false);
+  }
+
   return (
     <section className="fixed z-50 flex flex-col top-0 left-0 w-full min-h-16 bg-gradient-to-br from-[var(--nd)] to-[var(--th)]">
       <button 
@@ -51,7 +56,7 @@ export const NavBar = () => {
           </li>
         ))}
         <button 
-          onClick={toggleTheme}
+          onClick={changeTheme}
           className="flex h-16 p-2 items-center text-lg font-bold bg-[var(--st)]/50"
         >
           <h1 className="dark:text-[var(--txt)] text-[var(--txt)] ">

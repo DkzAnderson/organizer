@@ -6,12 +6,10 @@ import { db } from '../../config/firebase';
 import { fromFirebase, getNotes, DeleteNote } from '../../services/notesServices';
 import { Note } from '../../types/Note';
 import { FaPlusCircle } from "react-icons/fa";
-import { useTheme } from '../../context/ThemeProvider';
 import { EditNote } from '../organizador/EditNote';
 
 
 export const MainList = () => {
-    const { toggleTheme } = useTheme();
     // Estados principales
     const [data, setData] = useState<Note[]>([]);
     const [loading, setLoading] = useState(true);
@@ -107,12 +105,13 @@ export const MainList = () => {
     }
 
     return (
-        <section className='relative flex pt-16'>
+        <section className='relative flex pt-16 md:justify-center'>
+            {/* Interfaz para Eliminar nota */}
             {deleteInterface &&  (
             <div className='absolute z-20 flex items-center justify-center min-h-screen w-full bg-black/75'>
-            <div className='flex flex-col items-center justify-center bg-[(var--nd-light)] dark:bg-[(var--nd-dark)] p-10'>
-                <h1 className='text-[var(--txt)] dark:text-[var(--txt)] text-2xl font-bold'>
-                    ¿ Estas seguro de que quieres eliminar la nota: <b className='text-red-500'>{noteSelected?.name}</b>?
+            <div className='flex flex-col items-center justify-center p-5'>
+                <h1 className='text-[var(--txt)] dark:text-[var(--txt)] text-2xl font-bold p-5 bg-[var(--rd)]/75 rounded-lg'>
+                    ¿ Estas seguro de que quieres eliminar la nota: <b className='text-[var(--th)]'>{noteSelected?.name}</b>?
                 </h1>
                 <span className='w-full mt-10 flex gap-2 h-12 text-2xl font-bold'>
 
@@ -132,9 +131,7 @@ export const MainList = () => {
             </div>
         </div>
             )}
-
-
-            {/* Aquí puedes agregar tu diseño para mostrar las notas */}
+            {/* Interfaz de carga */}
             {loading && (
                 <div className='flex min-h-screen w-full items-center justify-center'>
                     <p className='dark:text-[var(--txt)] text-[var(--txt)] text-2xl animate-pulse duration-300'>
@@ -142,6 +139,7 @@ export const MainList = () => {
                     </p>
                 </div>
             )}
+            {/* Si no hay notas  */}
             {!loading && data.length === 0 && (
                 <div className='flex min-h-screen w-full items-center justify-center'>
                     <p className='dark:text-[var(--txt)] text-[var(--txt)] text-2xl animate-pulse duration-300'>
@@ -149,9 +147,9 @@ export const MainList = () => {
                     </p>
                 </div>
             )}
-
+            {/* Interfaz regular */}
             {!loading && data.length > 0 && (
-                <div className='z-10 flex flex-col w-full min-h-[85vh] py-10 px-2'>
+                <div className='z-10 flex flex-col w-full md:w-1/2 min-h-[85vh] py-10 px-2'>
                     <h1 className='mb-4 font-bold text-center dark:text-[var(--txt-2)] text-[var(--txt-2)] '>
                         Selecciona una nota para editarla
                     </h1>
@@ -199,11 +197,6 @@ export const MainList = () => {
                     </ul>
                 </div>
             )}
-
-
-
-
-
         </section>
     );
 };

@@ -38,8 +38,8 @@ export const EditNote: React.FC< Props > = ({initialData,changeInterface,fetch})
       }, []);
 
     return (
-        <section className='flex w-full h-full relative '>
-            <div className='z-10 flex flex-col min-h-96 w-full relative'>
+        <section className='flex w-full min-h-screen relative pt-20'>
+            <div className='z-10 flex flex-col min-h-full w-full relative'>
                 <button 
                     className='text-center text-lg font-bold w-full py-4 dark:bg-[var(--nd)] bg-[var(--nd)] dark:text-[var(--txt)] text-[var(--txt)]'
                     onClick={()=>changeInterface(false)}

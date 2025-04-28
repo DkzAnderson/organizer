@@ -2,9 +2,16 @@ import { Link } from "react-router";
 import { NavBar } from "../components/navBar/NavBar";
 
 
-
-
 /*
+
+Costos comunes
+- Empanadas  4s
+- Arepas     7s
+- Gaseosa    3s
+- Queso     28s 1kg
+- 
+
+
 
     Modulo para el manejo de finanzas personales
 
@@ -44,6 +51,11 @@ const options: OptionsProps[] = [
         url: '',
         icon: ''
     },
+    {
+        name: 'Modelo de cuenta',
+        url: '/finances/models',
+        icon: ''
+    }
 ]
 
 
