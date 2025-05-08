@@ -10,6 +10,7 @@ interface menuOptionsProps {
 }
 
 
+
 export const NavBar = () => {
 
   const [menuIsOpen, setMenu] = useState(false);
@@ -47,19 +48,26 @@ export const NavBar = () => {
           <li key={i}>
             <Link
               to={option.url}
-              className="flex h-16 p-2 items-center text-lg font-bold bg-[var(--st)]/50"
-            > 
-              <h1 className="dark:text-[var(--txt)] text-[var(--txt)]">
+              className="flex relative group h-16 p-2 items-center text-lg font-bold bg-[var(--st)]/50 hover:bg-transparent transition-all ease-linear duration-500"
+            >
+              <div className="absolute z-0 rounded-lg size-full bg-gradient-to-br from-[var(--rd)]/75 skew-x-20 translate-x-[-110%] group-hover:translate-x-[0%] transition-all ease-linear duration-500">
+
+              </div>
+              <h1 className="pl-2 z-10 dark:text-[var(--txt)] text-[var(--txt)]">
                 {option.name}
               </h1>
             </Link>
           </li>
         ))}
+
         <button 
           onClick={changeTheme}
-          className="flex h-16 p-2 items-center text-lg font-bold bg-[var(--st)]/50"
+          className="flex relative group h-16 items-center text-lg font-bold bg-[var(--st)]/50 hover:bg-transparent transition-all ease-linear duration-500 cursor-pointer"
         >
-          <h1 className="dark:text-[var(--txt)] text-[var(--txt)] ">
+          <div className="absolute z-0 rounded-lg size-full bg-gradient-to-br from-[var(--rd)]/75 skew-x-20 translate-x-[-110%] group-hover:translate-x-[0%] transition-all ease-linear duration-500">
+
+          </div>
+          <h1 className="p-2 z-10 cursor-pointer dark:text-[var(--txt)] text-[var(--txt)] ">
             Cambiar tema
           </h1>
         </button>

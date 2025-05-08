@@ -155,13 +155,13 @@ export const MainList = () => {
                     </h1>
 
                     <button
-                        className='relative grid grid-cols-[80%_20%] gap-2 h-16 items-center pl-2 pr-4.5 bg-[var(--rd)] dark:[var(--rd)] rounded-lg'
+                        className='relative cursor-pointer grid grid-cols-[80%_20%] gap-2 h-16 items-center pl-2 pr-4.5 bg-[var(--rd)] dark:[var(--rd)] rounded-lg'
                         onClick={newNote}
                     >
-                        <h1 className='text-lg font-bold text-start text-[var(--txt)]'>
+                        <h1 className='text-lg font-bold text-start text-[var(--txt)] '>
                             Nueva nota
                         </h1>
-                        <label className='flex items-center justify-center size-full text-3xl'>
+                        <label className='flex items-center justify-center size-full text-3xl cursor-pointer'>
                             <FaPlusCircle className='text-lime-500' />
                         </label>
                     </button>
@@ -170,10 +170,13 @@ export const MainList = () => {
                         {data.map(note => (
                             <li
                                 key={note.id}
-                                className='relative grid grid-cols-[80%_20%] min-h-16 max-h-16 items-center px-2 bg-[var(--nd)] dark:[var(--nd)] rounded-lg'
+                                className='relative group cursor-pointer grid grid-cols-[80%_20%] min-h-16 max-h-16 items-center px-2 bg-[var(--nd)] dark:[var(--nd)] hover:bg-transparent rounded-lg overflow-hidden duration-500 transition-all ease-in'
                             >
+                                <div className='h-full w-[103%] absolute z-0 bg-gradient-to-br from-[var(--th)]/75 to-[var(--rd)]/75 skew-x-46 translate-x-[-110%] group-hover:translate-x-[-10%] duration-500 transition-all ease-in-out'>
+
+                                </div>
                                 <h2 
-                                    className='mb-1 text-lg font-bold truncate text-[var(--txt)] dark:[var(--txt)]'
+                                    className='z-10 mb-1 text-lg font-bold truncate text-[var(--txt)] dark:[var(--txt)]'
                                     onClick={()=>editNote(note)}
                                 >
                                     {note.name}
@@ -181,7 +184,7 @@ export const MainList = () => {
 
                                 <div className='size-full flex'>
                                     <button
-                                        className='flex justify-center items-center size-full text-3xl text-red-500'
+                                        className='flex cursor-pointer z-10 justify-center items-center size-full text-3xl text-red-500'
                                         onClick={() => answerDeleteNote(note)}
                                     >
                                         <FaTrashCan />

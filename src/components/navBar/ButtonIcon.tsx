@@ -8,7 +8,7 @@ export const ButtonIcon: React.FC< Props > = ({menuState}) => {
 
 
   return (
-    <div className='size-full flex relative'>
+    <div className='size-full flex relative cursor-pointer'>
         {/* top */}
         <span className={`absolute transition-all ease-in-out duration-500 ${menuState ? 'left-0.5 top-6 rotate-45' : 'left-0.5 top-3'}  h-2 w-[90%] bg-[var(--th)] dark:bg-[var(--th)] rounded-full`}></span>
         {/* middle */}
